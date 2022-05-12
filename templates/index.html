@@ -27,6 +27,10 @@
 
 
     <style>
+        *{
+            font-family: 'Gamja Flower', cursive;
+        }
+
         .mytitle {
             display: inline-block;
             width: 100%;
@@ -46,7 +50,7 @@
         }
 
         .wrap {
-            margin: 20px auto 0px auto;
+            margin: 20px auto 30px auto;
             width: 95%;
             max-width: 1700px;
         }
@@ -87,6 +91,17 @@
             font-family: 'Gamja Flower', cursive;
             font-size: 2rem;
         }
+        .card-title{
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        .card:hover {
+            border: black solid 2px;
+            font-weight: bolder;
+        }
+        .footer > .reference{
+            float: right;
+        }
     </style>
 
     <script>
@@ -121,7 +136,7 @@
                                                         <img src="${img_path}" class="card-img-top" alt="...">
                                                     </a>
                                                     <div class="card-body">
-                                                        <h5 class="card-title">${item_name}</h5>
+                                                        <h3 class="card-title">${item_name}</h3>
                                                         <p class="card-text">${intro}</p>
                                                     </div>
                                                 </div>
@@ -151,7 +166,7 @@
         {% else %}
             <ul class="btn">
                 <a href="/login">
-                    <button type="button" class="btn btn-outline-dark">로그인하기</button>
+                    <button type="button" class="btn btn-outline-dark">로그인/회원가입</button>
                 </a>
             </ul>
         {% endif %}
@@ -161,23 +176,28 @@
     <section class="hero is-white">
     <div class="hero-body has-text-centered" style="padding-bottom:1rem;margin:auto;">
         <h1 class="title is-sparta">어쩔쓰레기</h1>
-        <h3 class="subtitle is-sparta">세상을 더 깨끗하게</h3>
+        <h3 class="subtitle is-sparta">올바른 분리배출로 세상을 더 깨끗하게</h3>
     </div>
     </section>
 
     <div class="wrap">
-    <div class="row row-cols-1 row-cols-md-4 g-4" id="items">
-        <div class="col">
-            <div class="card">
-                <img src="https://sitem.ssgcdn.com/46/26/61/item/0000006612646_i1_1200.jpg" class="card-img-top"
-                     alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">녹차</h5>
-                    <p class="card-text">녹차 티백은 간편하게 우려먹을 수 있도록 소량으로 포장되어 있다. 녹차 티백의 올바른 분리배출 방법은 무엇일까?</p>
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="items">
+            <div class="col">
+                <div class="card">
+                    <img src="https://sitem.ssgcdn.com/46/26/61/item/0000006612646_i1_1200.jpg" class="card-img-top"
+                         alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">녹차</h5>
+                        <p class="card-text">녹차 티백은 간편하게 우려먹을 수 있도록 소량으로 포장되어 있다. 녹차 티백의 올바른 분리배출 방법은 무엇일까?</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="footer">
+        <h5 class="reference">내용 출처 : 쓰레기사전 | 안지훈 지음 | 정독 출판</h5>
     </div>
+
 </body>
 </html>

@@ -91,14 +91,16 @@
 
         function posting() {
             let category = $('#category').val()
-            let item_name = $('#item_name').val()
-            let img_path = $('#img_path').val()
-            let content_txt = $('#content_txt').val()
+            let item_name = $('#name').val()
+            let img_path = $('#img').val()
+            let intro = $('#intro').val()
+            let num = $('#num').val()
+            let exp = $('#exp').val()
 
             $.ajax({
                 type: 'POST',
                 url: '/save_posts',
-                data: {category_give: category, item_name_give: item_name, img_path_give: img_path, content_txt_give: content_txt},
+                data: {category_give: category, item_name_give: item_name, img_path_give: img_path, intro_give: intro, num_give: num, exp_give: exp},
                 success: function (response) {
                     alert(response['msg'])
                     window.location.reload()
@@ -115,19 +117,30 @@
     </div>
 
     <div class="form-floating mb-3">
-        <input id="item_name" type="text" class="form-control">
+        <input id="name" type="text" class="form-control">
         <label>아이템 이름</label>
     </div>
 
     <div class="form-floating mb-3">
-        <input id="img_path" type="text" class="form-control">
+        <input id="num" type="text" class="form-control">
+        <label>아이템 넘버</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input id="img" type="text" class="form-control">
         <label>이미지 경로</label>
     </div>
 
     <div class="form-floating">
-        <textarea id="content_txt" class="form-control" placeholder="Leave a comment here"></textarea>
-        <label for="floatingTextarea2">컨텐츠 내용</label>
+        <textarea id="intro" class="form-control" placeholder="Leave a comment here"></textarea>
+        <label for="floatingTextarea2">인트로</label>
     </div>
+
+    <div class="form-floating">
+        <textarea id="exp" class="form-control" placeholder="Leave a comment here"></textarea>
+        <label for="floatingTextarea2">상세설명</label>
+    </div>
+
     <div class="mybtns">
         <button onclick="posting()" type="button" class="btn btn-dark">DB에 저장하기</button>
     </div>

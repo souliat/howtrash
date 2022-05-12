@@ -16,6 +16,9 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -30,14 +33,12 @@
 
 
     <script>
-        // 페이지 로드 되자마자 댓글들 가지고 오는 함수
+        // 페이지 로드 되자마자 댓글 및 아이템 정보들 가지고 오는 함수
         $(document).ready(function () {
             get_comments({{ item_info.num }})
 
-
-            let temp_html = `{{ item_info.exp }}`
-            console.log(temp_html)
-            $("#exp-list").append(temp_html)
+            let temp_html = `{{ item_info.exp|tojson }}`
+            $("#exp-list").append(temp_html.replaceAll("\"", ""))
         })
 
         function login_notice() {
@@ -86,7 +87,6 @@
                 data: {},
                 success: function (response) {
                     if (response["status"] == "login") {
-
                         let posts = response["posts"]
 
                         for (let i = 0; i < posts.length; i++) {
@@ -99,7 +99,7 @@
                             let html_temp = `<div class="box" id="${post["_id"]}">
                             <article class="media">
                                 <div class="media-left">
-                                    <a class="image is-64x64" href="/user/${post['username']}">
+                                    <a class="image is-64x64" href="">
                                         <img class="is-rounded" src="/static/${post['profile_pic_real']}" alt="Image">
                                     </a>
                                 </div>
@@ -255,23 +255,27 @@
         {% else %}
             <ul class="btn">
                 <a href="/login">
-                    <button type="button" class="btn btn-outline-dark">로그인하기</button>
+                    <button type="button" class="btn btn-outline-dark">로그인/회원가입</button>
                 </a>
             </ul>
         {% endif %}
     </div>
 
+    <div><h1 align="center" class="main_title">♻{{ item_info.name }}</h1></div>
     <div class="main_box">
         <div class="img_box">
-            <img id="img" width="300px" height="300px" src="{{ item_info.img }}">
+            <img id="img" width="400px" height="400px" class="image-box" src="{{ item_info.img }}">
         </div>
         <div class="explain_box">
             <div id="exp-list">
+
             </div>
         </div>
     </div>
     <div id="name" class="product_name">
     </div>
+
+    <hr style="border: solid 1px black">
 
     {% if status %}
     <!-- 글 쓰는 섹션 -->

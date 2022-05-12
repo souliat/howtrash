@@ -10,6 +10,11 @@
 /*    margin-bottom: 30px;*/
 /*}*/
 
+
+* {
+    font-family: 'Gamja Flower', cursive;
+}
+
 .mytitle {
     display: inline-block;
     width: 100%;
@@ -69,6 +74,7 @@
     border: 1px solid gray;
     border-radius: 10px;
     padding: 20px;
+    font-size: 1.3rem;
 
     display: flex;
     flex-direction: column;
@@ -127,6 +133,7 @@
     background-color: transparent;
     border-color: #100d0d;
     color: #100d0d !important;
+
 }
 
 .modal-content {
@@ -153,4 +160,34 @@ input::-webkit-calendar-picker-indicator {
 .nickname {
     font-family: 'Gamja Flower', cursive;
     font-size: 2rem;
+}
+.image-box {
+    border-radius: 10px;
+    border: 1px solid;
+}
+.control {
+    margin-top: 50px;
+}
+.main_title {
+    font-size: xxx-large;
+    /*display: flex;*/
+    text-align: center;
+    align: "center";
+    margin-bottom: 20px;
+
+}
+hr {
+    margin-right: auto;
+    margin-left: auto;
+    align:"center";
+    width: 900px;
+    margin-top: 80px;
+
+}
+.fa-heart {
+    color: red;
+}
+
+#post-box {
+    font-size: 1.2rem;
 }

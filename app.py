@@ -50,7 +50,7 @@ def sign_in():
          'id': username_receive,
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
         status = True
 
         return jsonify({'result': 'success', 'token': token, 'status': status})
@@ -94,20 +94,25 @@ def get_posts():
 @app.route("/save_posts", methods=["POST"])
 def save_posts():
     category_receive = request.form['category_give']
-    item_num_receive = request.form['item_num_give']
+    item_name_receive = request.form['item_name_give']
+    num_receive = request.form['num_give']
     img_path_receive = request.form['img_path_give']
-    content_txt_receive = request.form['content_txt_give']
+    intro_receive = request.form['intro_give']
+    exp_receive = request.form['exp_give']
 
     doc = {
         'category': category_receive,
-        'item_num': item_num_receive,
-        'img_path': img_path_receive,
-        'content_txt': content_txt_receive
+        'num': num_receive,
+        'name': item_name_receive,
+        'img': img_path_receive,
+        'intro': intro_receive,
+        'exp': exp_receive
     }
 
     db.items.insert_one(doc)
 
     return jsonify({'msg': '저장 완료!'})
+
 
 @app.route('/items/<item_num>')
 def item(item_num):
@@ -165,7 +170,6 @@ def get_comments():
     try:
         if token_receive is not None:
             payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-
             num_receive = request.args.get("num_give") # 해당 상세페이지에 해당하는 num이 get방식으로 전달되었으므로 args.get 사용
 
             if num_receive == "":
@@ -180,7 +184,8 @@ def get_comments():
 
             return jsonify({"result": "success", "status": "login", "posts": posts, "msg": "포스팅을 가져왔습니다."})
         else:
-            posts = list(db.posts.find({}).sort("date", -1).limit(20))
+            num_receive = request.args.get("num_give")
+            posts = list(db.posts.find({"item_num": num_receive}).sort("date", -1).limit(20))
             for post in posts:
                 post["_id"] = str(post["_id"])
                 post["count_heart"] = db.likes.count_documents({"post_id": post["_id"], "type": "heart"})
